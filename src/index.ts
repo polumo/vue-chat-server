@@ -1,13 +1,15 @@
-import type { Context } from 'hono'
 import { Hono } from 'hono'
 import { cors } from 'hono/cors'
-import { responseMiddleware } from './middlewares/responseMiddleware.ts'
+import { prettyJSON } from 'hono/pretty-json'
 import connectDB from './config/db.ts'
-
-const app = new Hono()
+import apiRoutes from './routes/index.ts'
 
 connectDB()
 
-app.use(cors(), responseMiddleware)
+const app = new Hono()
+
+app.use(cors(), prettyJSON())
+
+app.route('/', apiRoutes)
 
 export default app
