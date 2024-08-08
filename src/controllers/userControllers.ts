@@ -51,7 +51,7 @@ const registerUser = async ({ req, status, json }: Context) => {
     })
     const token = await generateToken(newUser._id.toString())
     status(201)
-    return json(createResponse({ code: 201, data: token, message: '注册成功' }))
+    return json(createResponse({ code: 201, data: token, message: '注册成功，正在登录...' }))
   } catch (error: any) {
     console.log(error)
     status(500)
